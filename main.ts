@@ -1,57 +1,83 @@
-// Indonesia in Numbers — entry hand-in program.
-//
-// Copies the static site (app/) and its screenshots (screenshots/) from this
-// repository into the output directory and writes the dossier.json for the
-// entry, built with the kit's makefun-frontend library.
-//
-// Run outside the grader with:
-//   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-// Inside the grader /output is used instead of MAKEFUN_OUTPUT_DIR.
-
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildDossier } from "./vendor/makefun-frontend.ts";
 
-const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)));
+// The folder holding this script is the repo root. Every source tree below
+// is resolved from it, so the entry behaves the same wherever it is run from.
+const repoRoot = dirname(fileURLToPath(import.meta.url));
 
-function outputDir(): string {
-  const fromEnv = process.env.MAKEFUN_OUTPUT_DIR;
-  if (fromEnv !== undefined && fromEnv !== "") return resolve(fromEnv);
-  return "/output";
-}
+// The grader mounts the output directory, so this script only creates that
+// directory and clears its known children. Removing the directory itself
+// fails on a mount point (EBUSY) and is never attempted here.
+const requestedOut = process.env.MAKEFUN_OUTPUT_DIR;
+const out =
+  requestedOut !== undefined && requestedOut !== "" ? requestedOut : "/output";
 
-function copyTree(source: string, target: string): void {
-  if (!existsSync(source)) {
-    throw new Error(`Indonesia in Numbers: missing ${source}`);
+const appSource = join(repoRoot, "app");
+const shotsSource = join(repoRoot, "screenshots");
+
+const expectedShots = [
+  "1-overview.png",
+  "2-economy.png",
+  "3-compare.png",
+  "4-phone.png",
+];
+
+// Remove one known child of the output directory. Failures are swallowed:
+// a stale child that cannot go away is overwritten by the copy below, and
+// nothing here is worth aborting the whole run over.
+function clearChild(name: string): void {
+  try {
+    rmSync(join(out, name), { recursive: true, force: true });
+  } catch {
+    // Leave the child in place; the fresh copy overwrites what matters.
   }
-  cpSync(source, target, { recursive: true });
 }
 
-function main(): void {
-  const out = outputDir();
-  rmSync(out, { recursive: true, force: true });
-  mkdirSync(out, { recursive: true });
-
-  copyTree(join(repoRoot, "app"), join(out, "app"));
-  copyTree(join(repoRoot, "screenshots"), join(out, "screenshots"));
-
-  const dossier = buildDossier(repoRoot, {
-    text_max_bytes: 1572864,
-    screenshots: { max: 4, max_bytes: 1572864 },
-    app_max_files: 993,
-    app_max_bytes: 16777216,
-    app_path_max_bytes: 1000,
-  });
-  writeFileSync(join(out, "dossier.json"), dossier);
-
-  // The dossier embeds the screenshots, so refuse a hand-in with none.
-  const shotNames = ["1-overview.png", "2-economy.png", "3-compare.png", "4-phone.png"];
-  const shotCount = shotNames.filter((name) => existsSync(join(repoRoot, "screenshots", name))).length;
-  if (shotCount === 0) {
-    throw new Error("Indonesia in Numbers: no screenshots in screenshots/ — take 3 or 4 real renders first");
-  }
-  console.log(`Indonesia in Numbers: wrote ${out} (dossier ${dossier.length} bytes, ${shotCount} screenshots)`);
+if (!existsSync(appSource)) {
+  throw new Error(`missing app/ tree next to main.ts: ${appSource}`);
+}
+if (!existsSync(shotsSource)) {
+  throw new Error(`missing screenshots/ tree next to main.ts: ${shotsSource}`);
+}
+if (!existsSync(join(appSource, "index.html"))) {
+  throw new Error(`missing app/index.html in ${appSource}`);
 }
 
-main();
+const foundShots = expectedShots.filter((name) =>
+  existsSync(join(shotsSource, name)),
+);
+if (foundShots.length === 0) {
+  throw new Error(
+    `screenshots/ holds none of ${expectedShots.join(", ")}`,
+  );
+}
+
+mkdirSync(out, { recursive: true });
+
+const dossierPath = join(out, "dossier.json");
+
+// Only the three known children are cleared, never the output dir itself.
+clearChild("app");
+clearChild("screenshots");
+clearChild("dossier.json");
+
+cpSync(appSource, join(out, "app"), { recursive: true });
+cpSync(shotsSource, join(out, "screenshots"), { recursive: true });
+
+const dossier = await buildDossier(repoRoot, {
+  text_max_bytes: 1572864,
+  screenshots: { max: 4, max_bytes: 1572864 },
+  app_max_files: 993,
+  app_max_bytes: 16777216,
+  app_path_max_bytes: 1000,
+});
+const dossierBytes = Buffer.isBuffer(dossier)
+  ? dossier
+  : Buffer.from(dossier as unknown as Uint8Array);
+writeFileSync(dossierPath, dossierBytes);
+
+console.log(
+  `Indonesia in Numbers: wrote ${out} (dossier ${dossierBytes.length} bytes, ${foundShots.length} screenshots)`,
+);
