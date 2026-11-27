@@ -1,131 +1,108 @@
-// Kalandra national statistics — all figures are the fictional Republic of
-// Kalandra, compiled by its National Statistics Office (Kalandra Statistics).
-// Years run 2015-2025; every series below is used by at least one page.
+// Indonesia in Numbers — the dataset.
+//
+// Every figure below is a real published statistic. The `source` field on
+// each group names the publisher and the reference year so the site can cite
+// it next to the number. Figures are rounded for display; exact values live
+// in the sources named in the Sources section of the site.
 
-export const COUNTRY = {
-  name: 'Republic of Kalandra',
-  shortName: 'Kalandra',
-  office: 'Kalandra Statistics',
-  officeShort: 'KALSTAT',
-  capital: 'Aldermere City',
-  currency: 'kaland (KLD)',
-  language: 'Kalandrian',
-  areaKm2: 184620,
-  latestYear: 2025,
-  firstYear: 2015,
-  updated: '14 November 2025',
+export const META = {
+  country: "Indonesia",
+  updated: "26 November 2026",
+  currency: "IDR",
+  currencyName: "Indonesian rupiah",
 };
 
-export const YEARS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+// Headline indicators shown on the Overview hero.
+export const HEADLINE = [
+  { id: "population", label: "Population", value: 281.6, unit: "million", year: 2024, change: 0.8, changeLabel: "vs 2023", source: "BPS, Population Projection 2024", format: "1dp" },
+  { id: "gdp", label: "GDP", value: 1396, unit: "US$ bn", year: 2024, change: 1.8, changeLabel: "vs 2023", source: "World Bank, WDI 2024", format: "int" },
+  { id: "gdp-pc", label: "GDP per capita", value: 4926, unit: "US$", year: 2024, change: 1.1, changeLabel: "vs 2023", source: "World Bank, WDI 2024", format: "int" },
+  { id: "growth", label: "Real GDP growth", value: 5.03, unit: "%", year: 2024, change: -0.02, changeLabel: "pts vs 2023", source: "BPS, National Accounts 2024", format: "2dp" },
+  { id: "inflation", label: "Inflation (CPI, Dec)", value: 1.57, unit: "% yoy", year: 2024, change: -1.04, changeLabel: "pts vs Dec 2023", source: "BPS, Consumer Price Index, Dec 2024", format: "2dp" },
+  { id: "unemployment", label: "Unemployment rate", value: 4.91, unit: "%", year: 2024, change: -0.41, changeLabel: "pts vs Aug 2023", source: "BPS, Sakernas, Aug 2024", format: "2dp" },
+  { id: "poverty", label: "Poverty rate", value: 8.57, unit: "%", year: 2024, change: -0.47, changeLabel: "pts vs Sep 2023", source: "BPS, Poverty Profile, Sep 2024", format: "2dp" },
+  { id: "life", label: "Life expectancy", value: 74.1, unit: "years", year: 2024, change: 0.2, changeLabel: "vs 2023", source: "BPS, Human Development 2024", format: "1dp" },
+];
 
-// Annual national series. Index i matches YEARS[i].
+// Ten-year series, 2015-2024. Sources: World Bank WDI (GDP), BPS (CPI,
+// unemployment, population, trade). Values are the published headline series.
 export const SERIES = {
-  populationMillions: [7.62, 7.7, 7.79, 7.88, 7.97, 8.04, 8.11, 8.19, 8.27, 8.34, 8.42],
-  populationGrowthPct: [1.1, 1.0, 1.2, 1.1, 1.1, 0.9, 0.9, 1.0, 1.0, 0.8, 1.0],
-  gdpPerCapitaUsd: [6850, 7120, 7480, 7920, 8310, 7980, 8560, 9340, 10120, 10780, 11240],
-  gdpGrowthPct: [4.2, 4.6, 5.1, 5.4, 4.8, -3.2, 6.1, 5.8, 5.2, 4.9, 4.7],
-  unemploymentPct: [7.8, 7.4, 6.9, 6.3, 5.9, 7.1, 6.2, 5.5, 5.0, 4.8, 4.6],
-  cpiInflationPct: [3.4, 2.8, 3.1, 4.0, 3.6, 2.1, 4.8, 6.4, 5.2, 3.9, 3.2],
-  lifeExpectancy: [74.2, 74.5, 74.8, 75.1, 75.4, 75.2, 75.6, 76.0, 76.3, 76.6, 76.8],
-  birthsPer1000: [13.8, 13.6, 13.4, 13.2, 13.0, 12.4, 12.6, 12.8, 12.7, 12.5, 12.4],
-  deathsPer1000: [8.1, 8.0, 7.9, 7.8, 7.7, 8.4, 8.2, 7.9, 7.8, 7.7, 7.6],
-  medianWageKld: [4120, 4290, 4510, 4780, 5020, 4980, 5240, 5610, 5980, 6310, 6640],
-  exportsBnUsd: [24.1, 25.8, 28.3, 31.2, 33.4, 29.6, 34.8, 38.9, 40.2, 39.1, 38.2],
-  importsBnUsd: [22.8, 24.0, 26.1, 28.9, 30.8, 28.1, 31.9, 35.4, 36.8, 35.9, 34.6],
+  years: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+  gdpUsdBn: [861, 932, 1016, 1042, 1119, 1059, 1186, 1319, 1371, 1396],
+  gdpGrowthPct: [4.88, 5.03, 5.07, 5.17, 5.02, -2.07, 3.70, 5.31, 5.05, 5.03],
+  inflationPct: [3.35, 3.02, 3.61, 3.13, 2.72, 1.68, 1.87, 5.51, 2.61, 1.57],
+  unemploymentPct: [6.18, 5.61, 5.50, 5.34, 5.28, 7.07, 6.49, 5.86, 5.32, 4.91],
+  populationM: [255.5, 258.7, 261.9, 265.0, 268.1, 271.1, 273.9, 276.4, 279.4, 281.6],
+  exportsUsdBn: [150.4, 145.2, 168.8, 180.0, 167.7, 163.2, 231.6, 291.9, 258.8, 264.7],
+  importsUsdBn: [142.7, 135.7, 156.9, 188.7, 171.3, 141.6, 196.2, 237.4, 221.9, 233.7],
 };
 
-export const AGE_STRUCTURE_2025 = [
-  { group: '0–14 years', pct: 21.3 },
-  { group: '15–24 years', pct: 14.6 },
-  { group: '25–54 years', pct: 39.8 },
-  { group: '55–64 years', pct: 12.4 },
-  { group: '65+ years', pct: 11.9 },
+// Age structure, 2024 (BPS). Millions of people per band.
+export const AGE_GROUPS = [
+  { band: "0–14", value: 68.6 },
+  { band: "15–24", value: 46.8 },
+  { band: "25–54", value: 118.9 },
+  { band: "55–64", value: 27.0 },
+  { band: "65+", value: 20.3 },
 ];
 
-export const EMPLOYMENT_SECTORS_2025 = [
-  { sector: 'Services', pct: 53.7 },
-  { sector: 'Industry', pct: 27.9 },
-  { sector: 'Agriculture', pct: 18.4 },
+// Ten largest provinces by 2024 population (BPS). GRDP share is the
+// province's share of national GDP at current prices, 2024 (BPS).
+export const PROVINCES = [
+  { name: "West Java", pop: 50.3, grdpShare: 14.3, poverty: 7.5, capital: "Bandung" },
+  { name: "East Java", pop: 41.8, grdpShare: 14.4, poverty: 10.3, capital: "Surabaya" },
+  { name: "Central Java", pop: 37.9, grdpShare: 8.4, poverty: 10.5, capital: "Semarang" },
+  { name: "North Sumatra", pop: 15.6, grdpShare: 4.9, poverty: 8.2, capital: "Medan" },
+  { name: "Banten", pop: 12.4, grdpShare: 3.2, poverty: 5.8, capital: "Serang" },
+  { name: "Jakarta", pop: 10.6, grdpShare: 16.9, poverty: 4.2, capital: "Jakarta" },
+  { name: "South Sulawesi", pop: 9.4, grdpShare: 3.2, poverty: 8.2, capital: "Makassar" },
+  { name: "Lampung", pop: 9.3, grdpShare: 1.8, poverty: 11.5, capital: "Bandar Lampung" },
+  { name: "South Sumatra", pop: 8.8, grdpShare: 2.7, poverty: 11.6, capital: "Palembang" },
+  { name: "West Sumatra", pop: 6.0, grdpShare: 1.4, poverty: 5.8, capital: "Padang" },
 ];
 
-export const REGIONS = [
-  { id: 'aldermere', name: 'Aldermere', capital: 'Aldermere City', population: 2140000, areaKm2: 12480, gdpPerCapitaUsd: 16480, unemploymentPct: 3.4, lifeExpectancy: 78.1, urbanPct: 91 },
-  { id: 'northgate', name: 'Northgate', capital: 'Port Venn', population: 1480000, areaKm2: 31200, gdpPerCapitaUsd: 12320, unemploymentPct: 4.1, lifeExpectancy: 77.2, urbanPct: 74 },
-  { id: 'vostara', name: 'Vostara', capital: 'Kessig', population: 1290000, areaKm2: 28900, gdpPerCapitaUsd: 9860, unemploymentPct: 5.2, lifeExpectancy: 76.4, urbanPct: 63 },
-  { id: 'merrow', name: 'Merrow Coast', capital: 'Sable Bay', population: 1120000, areaKm2: 19800, gdpPerCapitaUsd: 10440, unemploymentPct: 4.8, lifeExpectancy: 76.9, urbanPct: 68 },
-  { id: 'telmor', name: 'Telmor Highlands', capital: 'Dun Telmor', population: 870000, areaKm2: 54600, gdpPerCapitaUsd: 7210, unemploymentPct: 6.3, lifeExpectancy: 75.1, urbanPct: 41 },
-  { id: 'southfen', name: 'Southfen', capital: 'Marlow Fen', population: 1520000, areaKm2: 37640, gdpPerCapitaUsd: 8980, unemploymentPct: 5.6, lifeExpectancy: 75.8, urbanPct: 57 },
+// Regional comparison, 2024 (World Bank WDI; life expectancy 2023).
+// GDP per capita in current US$.
+export const COUNTRIES = [
+  { code: "IDN", name: "Indonesia", pop: 281.6, gdp: 1396, gdpPc: 4926, growth: 5.03, inflation: 1.57, unemp: 4.91, life: 74.1 },
+  { code: "VNM", name: "Vietnam", pop: 101.0, gdp: 476, gdpPc: 4711, growth: 7.09, inflation: 3.63, unemp: 2.23, life: 75.8 },
+  { code: "THA", name: "Thailand", pop: 71.7, gdp: 526, gdpPc: 7337, growth: 2.50, inflation: 0.42, unemp: 0.90, life: 76.9 },
+  { code: "MYS", name: "Malaysia", pop: 34.1, gdp: 421, gdpPc: 12347, growth: 5.13, inflation: 1.79, unemp: 3.21, life: 76.2 },
+  { code: "PHL", name: "Philippines", pop: 114.9, gdp: 461, gdpPc: 4014, growth: 5.69, inflation: 3.20, unemp: 3.76, life: 72.3 },
+  { code: "SGP", name: "Singapore", pop: 6.1, gdp: 531, gdpPc: 86879, growth: 4.37, inflation: 2.39, unemp: 2.81, life: 84.2 },
 ];
 
-// Consumer prices, kaland (KLD), average national price.
-export const PRICE_BASKET = [
-  { item: 'White bread, 1 kg', price2024: 3.42, price2025: 3.58, unit: 'KLD' },
-  { item: 'Milk, 1 litre', price2024: 2.18, price2025: 2.26, unit: 'KLD' },
-  { item: 'Rice, 1 kg', price2024: 2.96, price2025: 3.04, unit: 'KLD' },
-  { item: 'Chicken, 1 kg', price2024: 9.84, price2025: 10.31, unit: 'KLD' },
-  { item: 'Eggs, dozen', price2024: 4.12, price2025: 4.38, unit: 'KLD' },
-  { item: 'Petrol, 1 litre', price2024: 5.67, price2025: 5.82, unit: 'KLD' },
-  { item: 'City bus fare', price2024: 2.40, price2025: 2.50, unit: 'KLD' },
-  { item: 'Rent, 1-bed flat, city centre', price2024: 1840, price2025: 1925, unit: 'KLD / month' },
-  { item: 'Electricity, 1 kWh', price2024: 0.62, price2025: 0.66, unit: 'KLD' },
-  { item: 'Mobile data, 10 GB plan', price2024: 48.0, price2025: 46.5, unit: 'KLD / month' },
+// Top export goods, 2024 (BPS), US$ bn.
+export const EXPORT_GOODS = [
+  { good: "Coal and solid fuels", value: 44.9 },
+  { good: "Palm oil and derivatives", value: 27.4 },
+  { good: "Iron and steel", value: 27.8 },
+  { good: "Electrical machinery", value: 15.2 },
+  { good: "Footwear and apparel", value: 12.6 },
+  { good: "Rubber and articles", value: 9.8 },
+  { good: "Vehicles and parts", value: 9.4 },
+  { good: "Copper and ores", value: 8.9 },
 ];
 
-export const EDUCATION_2025 = {
-  literacyPct: 98.7,
-  primaryEnrolmentPct: 99.2,
-  secondaryEnrolmentPct: 94.1,
-  tertiaryEnrolmentPct: 58.3,
-  pupilsPerTeacherPrimary: 16.4,
-  schools: 4218,
-  universities: 23,
-  graduates2024: 61200,
+// Labour market, August 2024 (BPS Sakernas).
+export const LABOUR = {
+  workforceM: 152.1,
+  employedM: 144.6,
+  informalPct: 59.2,
+  youthUnempPct: 16.4,
+  bySector: [
+    { sector: "Agriculture, forestry & fishing", share: 28.5 },
+    { sector: "Trade, hotels & restaurants", share: 25.4 },
+    { sector: "Manufacturing", share: 18.8 },
+    { sector: "Community & personal services", share: 15.9 },
+    { sector: "Construction", share: 6.2 },
+    { sector: "Other (mining, utilities, finance)", share: 5.2 },
+  ],
 };
 
-export const HEALTH_2025 = {
-  doctorsPer10000: 28.4,
-  hospitalBedsPer10000: 42.1,
-  infantMortalityPer1000: 6.8,
-  healthSpendPctGdp: 7.9,
-  hospitals: 312,
-  clinics: 1840,
-  vaccinationCoveragePct: 96.2,
-};
-
-export const ENVIRONMENT_2025 = {
-  forestCoverPct: 46.8,
-  renewableSharePct: 38.5,
-  co2PerCapitaTonnes: 4.1,
-  protectedLandPct: 18.2,
-  recyclingRatePct: 44.6,
-};
-
-export const RELEASES = [
-  { date: '14 Nov 2025', title: 'Labour Force Survey, Q3 2025', status: 'Published' },
-  { date: '28 Nov 2025', title: 'Consumer Price Index, October 2025', status: 'Upcoming' },
-  { date: '05 Dec 2025', title: 'Regional GDP estimates 2024', status: 'Upcoming' },
-  { date: '12 Dec 2025', title: 'Population estimates, 1 July 2025', status: 'Upcoming' },
-  { date: '19 Dec 2025', title: 'Education statistics 2024/25', status: 'Upcoming' },
-  { date: '09 Jan 2026', title: 'Trade in goods, November 2025', status: 'Upcoming' },
+// Sources cited across the site.
+export const SOURCES = [
+  { name: "BPS — Statistics Indonesia", detail: "Population Projection 2024; National Accounts 2024; Consumer Price Index Dec 2024; Sakernas Aug 2024; Poverty Profile Sep 2024; Human Development 2024; Foreign Trade Statistics 2024.", url: "bps.go.id" },
+  { name: "World Bank — World Development Indicators", detail: "GDP, GDP per capita, population and growth series 2015–2024; life expectancy 2023 for the regional comparison.", url: "data.worldbank.org" },
+  { name: "IMF — World Economic Outlook, Oct 2024", detail: "Cross-check for GDP and inflation figures used in the comparison table.", url: "imf.org" },
 ];
-
-export const METHOD_NOTES = [
-  { topic: 'Population', text: 'Mid-year estimates from the civil register, adjusted with the 2024 census. Births and deaths are registered events; net migration comes from border and residence-permit records.' },
-  { topic: 'GDP', text: 'Chain-linked volume measures, base year 2020, compiled under the Kalandrian System of National Accounts (KSNA 2018). Per-capita figures use mid-year population and the annual average KLD/USD rate.' },
-  { topic: 'Prices', text: 'The consumer price index tracks 412 representative items in 38 towns. Prices are collected in the first two weeks of each month; weights come from the 2023 household budget survey.' },
-  { topic: 'Labour', text: 'The Labour Force Survey interviews 24,000 households each quarter. Unemployment follows the ILO definition: without work, available to start within two weeks, and actively seeking.' },
-  { topic: 'Health and education', text: 'Administrative records from the Ministry of Health and the Ministry of Education, cross-checked against survey samples. Enrolment is net enrolment of the official age group.' },
-];
-
-export function yearIndex(year) {
-  return YEARS.indexOf(year);
-}
-
-export function seriesAt(seriesName, year) {
-  const i = yearIndex(year);
-  return i < 0 ? null : SERIES[seriesName][i];
-}
-
-export function pctChange(now, before) {
-  return ((now - before) / before) * 100;
-}

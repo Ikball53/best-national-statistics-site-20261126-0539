@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Kalandra Statistics — official statistics for the Republic of Kalandra: population, economy, prices, health, education and regions.">
-<title>Kalandra in numbers · Kalandra Statistics</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230e7a5f'/%3E%3Ctext x='32' y='44' font-size='36' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Indonesia in Numbers — population, economy, prices, labour and trade statistics for Indonesia, with sources, charts and country comparisons.">
+  <meta name="theme-color" content="#0b2a4a">
+  <title>Indonesia in Numbers — National Statistics Explorer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2410c'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EID%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="#/">
-      <span class="brand-mark" aria-hidden="true">K</span>
-      <span class="brand-text"><strong>Kalandra Statistics</strong><span>National Statistics Office · Republic of Kalandra</span></span>
-    </a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="#/">Overview</a>
-      <a href="#/population">Population</a>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">ID</div>
+        <div>
+          <div class="brand-name">Indonesia in Numbers</div>
+          <div class="brand-sub">National Statistics Explorer · BPS · World Bank · IMF</div>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search indicators — try “inflation”" aria-label="Search indicators">
+        <span id="search-note" aria-live="polite"></span>
+      </div>
+    </div>
+    <nav aria-label="Sections">
+      <a href="#/overview">Overview</a>
       <a href="#/economy">Economy</a>
-      <a href="#/prices">Prices &amp; Labour</a>
-      <a href="#/health">Health</a>
-      <a href="#/education">Education</a>
+      <a href="#/population">Population</a>
+      <a href="#/prices">Prices</a>
+      <a href="#/labour">Labour</a>
+      <a href="#/trade">Trade</a>
       <a href="#/regions">Regions</a>
-      <a href="#/explorer">Data explorer</a>
+      <a href="#/compare">Compare</a>
+      <a href="#/sources">Data &amp; sources</a>
     </nav>
-  </div>
-</header>
-<main id="app" class="wrap"></main>
-<footer class="site-footer">
-  <div class="wrap">
-    <p><strong>Kalandra Statistics</strong> · National Statistics Office of the Republic of Kalandra · Aldermere City</p>
-    <p>All figures on this site are the fictional Republic of Kalandra's official statistics, compiled by KALSTAT. Figures are free to reuse with attribution. This is a demonstration site; no data is fetched from any other server.</p>
-    <p><a href="#/explorer">Methodology</a> · <a href="#/explorer">Release calendar</a> · <a href="#/">Back to overview</a></p>
-  </div>
-</footer>
-<script type="module" src="main.js"></script>
+  </header>
+
+  <main>
+    <p id="page-title">Overview</p>
+    <div id="view">
+      <noscript>
+        <section class="card">
+          <h1>Indonesia in Numbers</h1>
+          <p class="lede">This explorer needs JavaScript to draw its charts and switch sections. Headline figures for 2024: population 281.6 million; GDP US$1,396 billion; GDP per capita US$4,926; real growth 5.03%; inflation 1.57%; unemployment 4.91%; poverty 8.57%. Sources: BPS Statistics Indonesia and the World Bank.</p>
+        </section>
+      </noscript>
+    </div>
+  </main>
+
+  <footer>
+    <div class="inner">
+      <b>Indonesia in Numbers</b> — an independent statistics explorer built from published official data.
+      Figures: BPS — Statistics Indonesia (2024 releases) and the World Bank, World Development Indicators (2024).
+      Figures are rounded for display; see <a href="#/sources" style="color:#fff">Data &amp; sources</a> for exact references.
+      Updated 26 November 2026.
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
